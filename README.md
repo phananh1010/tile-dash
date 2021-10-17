@@ -1,7 +1,12 @@
+## Command to prepare a video tile
+```
+ffmpeg -i roller.mp4 -filter:v fps=30,scale=3840x1920 roller.yuv
+kvazaar -i roller.yuv --input-res 3840x1920 --input-fps 30 --tiles 10x20 -p 30 --mv-constraint frametilemargin --bitrate 50000000 -o roller10x20.h265
+
+```
 
 
-
-### list of command to generate tile files for DASH server
+### List of command to generate tile files for DASH server
 ```
 ffmpeg -i coaster2.mp4 -s 384x192 -c:v libx264 -b:v 256k -g 120 -an coaster2_384x192_256k.mp4
 ffmpeg -i coaster2.mp4 -s 768x384 -c:v libx264 -b:v 512k -g 120 -an coaster2_768x384_512k.mp4
