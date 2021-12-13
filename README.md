@@ -1,3 +1,6 @@
+## Introduction
+In this project, we notes several steps to prepare a traditional tile-based DASH server. Steps include splitting a 360-degree video from equirectangular format into tiles, host a DASH server, prepare an MP4Client program.
+
 ## Command to prepare a video tile
 ```
 ffmpeg -i roller.mp4 -filter:v fps=30,scale=3840x1920 roller.yuv
