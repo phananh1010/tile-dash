@@ -26,3 +26,19 @@ MP4Box -dash 2000 -rap -mpd-title coaster2-tile-dash -frag-rap -profile dashavc2
 cp coaster2_* /var/www/html/dash/
 MP4Client http://localhost/dash/coaster2_tiled.mpd
 ```
+### Start a simple HTTP server
+simple python HTTP server, or an apache server is sufficient
+
+## Install MP4Box and MP4Client
+Follow instruction here: https://github.com/gpac/gpac/wiki/GPAC-Build-Guide-for-Linux
+Use the Full GPAC Build options, change gpac_public to gpac in the buid files for deps_unix
+
+## Modify code
+#### Modify the MP4DClient source code
+Modify the main.c in the following directory: gpac/applications/mp4client
+
+Rebuild the .c file
+
+Run the MP4Client executable file using the following command:
+./MP4Client http://localhost/dash/coaster2/coaster210x5.mpd
+
