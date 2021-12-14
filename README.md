@@ -31,7 +31,9 @@ simple python HTTP server, or an apache server is sufficient
 
 ## Install MP4Box and MP4Client
 Follow instruction here: https://github.com/gpac/gpac/wiki/GPAC-Build-Guide-for-Linux
-Use the Full GPAC Build options, change gpac_public to gpac in the buid files for deps_unix.
+Use the Full GPAC Build options.
+NOTE: DO NOT USE GPAC_PUBLIC AS SUGGESTED, USE GPAC AND GO TO DEPS_UNIX AND CHANGE ALL GPAC_PUBLIC TO PUBLIC (IMPORTANT)
+Change gpac_public to gpac in the buid files for deps_unix.
 List of files to be changed:
 ```
 build_all.sh  
