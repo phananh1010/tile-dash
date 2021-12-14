@@ -70,3 +70,15 @@ To show a message to the client terminal screen, use the following function:
 ```
 fprintf(stderr, "message\n");
 ```
+
+
+## Debug
+
+#### Enable logging while calling MP4Client. 
+use `-rti` and `-log-file` option to specify output file. Use `-logs` to specify log level and module to be logged.
+For instance, checking log from all module:
+```
+MP4Client http://localhost/dash/coaster2/coaster210x5.mpd -rti hehe.txt -log-file huhu.txt -logs "all@info"
+```
+Source for log option: https://helpmanual.io/help/MP4Client/
+For example, to enable 
