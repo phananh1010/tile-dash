@@ -58,8 +58,15 @@ Modify the first line, point to python2
 Modify the main.c in the following directory: gpac/applications/mp4client
 The main entry function of Mp4Client starts from line #1131
 
-Rebuild the .c file
+Rebuild the .c file by navigate to the child directory, and execute `make` command. There must be a `Makefile` in that directory for the make to work
 
 Run the MP4Client executable file using the following command:
+```
 ./MP4Client http://localhost/dash/coaster2/coaster210x5.mpd
+```
 
+#### Make a hello message to the client terminal screen
+To show a message to the client terminal screen, use the following function:
+```
+fprintf(stderr, "message\n");
+```
