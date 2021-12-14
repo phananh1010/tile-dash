@@ -54,8 +54,9 @@ Modify the first line, point to python2
 
 
 ## Modify code
-#### Modify the MP4DClient source code
+#### Modify the MP4Client source code
 Modify the main.c in the following directory: gpac/applications/mp4client
+The main entry function of Mp4Client starts from line #1131
 
 Rebuild the .c file
 
