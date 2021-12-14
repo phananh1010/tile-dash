@@ -31,7 +31,25 @@ simple python HTTP server, or an apache server is sufficient
 
 ## Install MP4Box and MP4Client
 Follow instruction here: https://github.com/gpac/gpac/wiki/GPAC-Build-Guide-for-Linux
-Use the Full GPAC Build options, change gpac_public to gpac in the buid files for deps_unix
+Use the Full GPAC Build options, change gpac_public to gpac in the buid files for deps_unix.
+List of files to be changed:
+```
+build_all.sh  
+build_openhevc_shared.sh  
+build_openhevc_static.sh  
+build_opensvc_static.sh 
+./PlatinumSDK/BuildAndCopy2Public.sh 
+./avcap/BuildAndCopy2Public.sh
+```
+Have scons use python2 instead of python3. First, open scons file in sudo mode
+```
+sudo vi /usr/bin/scons
+```
+Modify the first line, point to python2
+```
+#! /usr/bin/python2
+```
+
 
 ## Modify code
 #### Modify the MP4DClient source code
