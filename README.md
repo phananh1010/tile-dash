@@ -105,3 +105,5 @@ Function performing DASH bitrate adaptation
 Main entry to the mp4client
 /application/mp4client/main.c      line: 1131      function: mp4client_main
 
+#### Important details regarding tiled-based streaming
+[TileAgg] is the log for tile related problems.
