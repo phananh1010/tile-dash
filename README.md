@@ -86,4 +86,12 @@ For instance, checking log from all module:
 MP4Client http://localhost/dash/coaster2/coaster210x5.mpd -rti rti.txt -log-file log.txt -logs "error@info"
 ```
 Source for log option: https://helpmanual.io/help/MP4Client/
-For example, to enable 
+
+
+#### Tracked positions to modify the program
+Function performing DASH bitrate adaptation
+/src/media_tools/dash_client.c     line: 4288      function: dash_do_rate_adaptation
+
+Main entry to the mp4client
+/application/mp4client/main.c      line: 1131      function: mp4client_main
+
