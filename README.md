@@ -87,6 +87,11 @@ MP4Client http://localhost/dash/coaster2/coaster210x5.mpd -rti rti.txt -log-file
 ```
 Source for log option: https://helpmanual.io/help/MP4Client/
 
+To debug with gdp, use this command to run the program and also load the test url:
+```
+gdb --args MP4Client http://localhost/dash/coaster2/coaster210x5.mpd
+```
+
 
 #### Tracked positions to modify the program
 Function performing DASH bitrate adaptation
