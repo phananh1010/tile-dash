@@ -105,6 +105,9 @@ Function performing DASH bitrate adaptation
 Main entry to the mp4client
 /application/mp4client/main.c       line: 1131      function: mp4client_main
 
+Dash module initilization
+/src/filters/dmx_dash.c             line: 2007      function: static GF_Err dashdmx_initialize(GF_Filter *filter)
+
 #### Important details regarding tiled-based streaming
 Tile data aggregation is ran on a separated thread. Code location:
 src/media_tools/filters/tileagg.c   line: 265
