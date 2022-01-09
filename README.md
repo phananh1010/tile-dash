@@ -100,10 +100,11 @@ b <absolute_path>/gpac/src/media_tools/dash_client.c:4309
 
 #### Tracked positions to modify the program
 Function performing DASH bitrate adaptation
-/src/media_tools/dash_client.c     line: 4288      function: dash_do_rate_adaptation
+/src/media_tools/dash_client.c      line: 4288      function: dash_do_rate_adaptation
 
 Main entry to the mp4client
-/application/mp4client/main.c      line: 1131      function: mp4client_main
+/application/mp4client/main.c       line: 1131      function: mp4client_main
 
 #### Important details regarding tiled-based streaming
-[TileAgg] is the log for tile related problems.
+Tile data aggregation is ran on a separated thread. Code location:
+src/media_tools/filters/tileagg.c   line: 265
