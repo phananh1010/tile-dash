@@ -111,3 +111,6 @@ Dash module initilization
 #### Important details regarding tiled-based streaming
 Tile data aggregation is ran on a separated thread. Code location:
 src/media_tools/filters/tileagg.c   line: 265
+
+Check tile stitching section at
+src/media_tools/filters/tileagg.c   line: 332       gf_bs_read_int(ctx->bs_r, 1);
