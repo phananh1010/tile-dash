@@ -92,6 +92,11 @@ To debug with gdp, use this command to run the program and also load the test ur
 gdb --args MP4Client http://localhost/dash/coaster2/coaster210x5.mpd
 ```
 
+To debug and use mouse to switch viewport, use the following command instead:
+```
+gdb --args -gui MP4Client http://localhost/dash/coaster2/coaster210x5.mpd#VR
+```
+
 To debug with breakpoints in another files, use this command:
 ```
 b <absolute_path>/gpac/src/media_tools/dash_client.c:4309
