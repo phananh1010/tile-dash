@@ -70,6 +70,11 @@ Run the MP4Client executable file using the following command:
 ./MP4Client http://localhost/dash/coaster2/coaster210x5.mpd
 ```
 
+or 
+```
+gpac -gui http://localhost/dash/coaster2/coaster210x5.mpd
+```
+
 #### Make a hello message to the client terminal screen
 To show a message to the client terminal screen, use the following function:
 ```
