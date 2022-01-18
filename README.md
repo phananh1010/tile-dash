@@ -72,8 +72,9 @@ Run the MP4Client executable file using the following command:
 
 or 
 ```
-gpac -gui http://localhost/dash/coaster2/coaster210x5.mpd
+gpac -gui http://localhost/dash/coaster2/coaster210x5.mpd -graph
 ```
+In the command above, `-gui` parameter must be included to run in DASH mode. `-graph` parameter allows a graph structure showing chains of modules to be printed at the end of the execution.
 
 #### Make a hello message to the client terminal screen
 To show a message to the client terminal screen, use the following function:
