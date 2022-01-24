@@ -1,5 +1,5 @@
 ## Introduction
-In this project, we notes several steps to prepare a traditional tile-based DASH server. Steps include splitting a 360-degree video from equirectangular format into tiles, host a DASH server, prepare an MP4Client program.
+In this project, we note several steps to prepare a traditional tile-based DASH server. Steps include splitting a 360-degree video from equirectangular format into tiles, host a DASH server, and prepare an MP4Client program.
 
 ## Command to prepare a video tile
 ```
@@ -31,7 +31,7 @@ simple python HTTP server, or an apache server is sufficient
 
 ## Install MP4Box and MP4Client
 Follow instruction here: https://github.com/gpac/gpac/wiki/GPAC-Build-Guide-for-Linux
-Use the Full GPAC Build options. When envoke `configure` command, remember to use `--enable-debug` option so that the program can be debugged.
+Use the Full GPAC Build options. When invoking the `configure` command, remember to use the `--enable-debug` option so that the program can be debugged.
 ```
 ./configure --enable-debug
 ```
@@ -63,7 +63,7 @@ Modify the first line, point to python2
 Modify the main.c in the following directory: gpac/applications/mp4client
 The main entry function of Mp4Client starts from line #1131
 
-Rebuild the .c file by navigate to the child directory, and execute `make` command. There must be a `Makefile` in that directory for the make to work
+Rebuild the .c file by navigating to the child directory, and execute `make` command. There must be a `Makefile` in that directory for the make to work
 
 Run the MP4Client executable file using the following command:
 ```
@@ -116,12 +116,15 @@ Function performing DASH bitrate adaptation
 Main entry to the mp4client
 /application/mp4client/main.c       line: 1131      function: mp4client_main
 
-Dash module initilization
+Dash module initialization
 /src/filters/dmx_dash.c             line: 2007      function: static GF_Err dashdmx_initialize(GF_Filter *filter)
 
 #### Important details regarding tiled-based streaming
-Tile data aggregation is ran on a separated thread. Code location:
+Tile data aggregation is run on a separate thread. Code location:
 src/media_tools/filters/tileagg.c   line: 265
 
 Check tile stitching section at
 src/media_tools/filters/tileagg.c   line: 332       gf_bs_read_int(ctx->bs_r, 1);
+
+
+
