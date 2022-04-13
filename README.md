@@ -4,7 +4,7 @@ In this project, we note several steps to prepare a traditional tile-based DASH 
 # Step 1: prepare video tiles
 We generate tiles from 360 videos in equirectangular format. Two tools are required: ffmpeg, kvazaar, and Mp4Box.
 
-## Command to prepare a video file
+### Step 1a: convert the video into yuv
 First, convert video from mp4 to yuv extension using ffmpeg, then re-encode the video such as motion vectors are constrained inside tiles.
 ```
 ffmpeg -i roller.mp4 -filter:v fps=30,scale=3840x1920 roller.yuv
@@ -12,7 +12,7 @@ kvazaar -i roller.yuv --input-res 3840x1920 --input-fps 30 --tiles 10x20 -p 30 -
 ```
 
 
-### List of command to generate tile files for DASH server
+### Step 1b: create tiles and mpd file from prepared yuv file
 Then, use ffmpeg to cut videos into multiple tiles, and use MP4Box to create associated mpd file
 ```
 ffmpeg -i coaster2.mp4 -s 384x192 -c:v libx264 -b:v 256k -g 120 -an coaster2_384x192_256k.mp4
@@ -20,7 +20,7 @@ ffmpeg -i coaster2.mp4 -s 768x384 -c:v libx264 -b:v 512k -g 120 -an coaster2_768
 MP4Box -dash 2000 -profile dashavc264:onDemand -mpd-title coaster2-dash -out coaster2.mpd -frag 2000 ./coaster2_768x384_512k.mp4 coaster2_384x192_256k.mp4 
 ```
 
-Here is another way to use kvazaar & MP4Client to generate tile and mpd files
+### NOTE: Here is another way to use kvazaar & MP4Client to generate tile and mpd files, this process has not been verified
 ```
 kvazaar -i coaster2.mp4 --input-res 3840x1920 -o coaster2_tiled10x20.hvc --tiles 10x20 --slices tiles --mv-constraint frametilemargin --bitrate 128000 --period 30 --input-fps 30
 kvazaar -i coaster2.mp4 --input-res 3840x1920 -o coaster2_tiled5x10.hvc --tiles 5x10 --slices tiles --mv-constraint frametilemargin --bitrate 512000000 --period 30 --input-fps 30
