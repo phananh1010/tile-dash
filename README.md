@@ -1,5 +1,7 @@
 # Introduction
-In this project, we note several steps to prepare a traditional tile-based DASH server. Steps including: (1) splitting a 360-degree video from equirectangular format into tiles, (2) hosting a DASH server, and (3) preparing an MP4Client program.
+In this project, we note several steps to prepare a traditional tile-based DASH streaming framework. The whole framework includes a tile-based DASH server and a streaming client.
+
+Steps including: (1) splitting a 360-degree video from equirectangular format into tiles, (2) hosting a DASH server, and (3) preparing an MP4Client program.
 
 # Step 1: prepare video tiles
 We generate tiles from 360 videos in equirectangular format. Two tools are required: ffmpeg, kvazaar, and Mp4Box.
