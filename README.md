@@ -1,24 +1,26 @@
-## Introduction
-In this project, we note several steps to prepare a traditional tile-based DASH server. Steps include splitting a 360-degree video from equirectangular format into tiles, host a DASH server, and prepare an MP4Client program.
+# Introduction
+In this project, we note several steps to prepare a traditional tile-based DASH server. Steps including: (1) splitting a 360-degree video from equirectangular format into tiles, (2) hosting a DASH server, and (3) preparing an MP4Client program.
+
+# Step 1: prepare video tiles
+We generate tiles from 360 videos in equirectangular format. Two tools are required: ffmpeg, kvazaar, and Mp4Box.
 
 ## Command to prepare a video file
-
+First, convert video from mp4 to yuv extension using ffmpeg, then re-encode the video such as motion vectors are constrained inside tiles.
 ```
 ffmpeg -i roller.mp4 -filter:v fps=30,scale=3840x1920 roller.yuv
 kvazaar -i roller.yuv --input-res 3840x1920 --input-fps 30 --tiles 10x20 -p 30 --mv-constraint frametilemargin --bitrate 50000000 -o roller10x20.h265
-
 ```
 
 
 ### List of command to generate tile files for DASH server
+Then, use ffmpeg to cut videos into multiple tiles, and use MP4Box to create associated mpd file
 ```
 ffmpeg -i coaster2.mp4 -s 384x192 -c:v libx264 -b:v 256k -g 120 -an coaster2_384x192_256k.mp4
 ffmpeg -i coaster2.mp4 -s 768x384 -c:v libx264 -b:v 512k -g 120 -an coaster2_768x384_512k.mp4
 MP4Box -dash 2000 -profile dashavc264:onDemand -mpd-title coaster2-dash -out coaster2.mpd -frag 2000 ./coaster2_768x384_512k.mp4 coaster2_384x192_256k.mp4 
 ```
-Check the file: http://localhost/dash/coaster2.mpd
 
-Use kvazaar to generate tile
+Here is another way to use kvazaar & MP4Client to generate tile and mpd files
 ```
 kvazaar -i coaster2.mp4 --input-res 3840x1920 -o coaster2_tiled10x20.hvc --tiles 10x20 --slices tiles --mv-constraint frametilemargin --bitrate 128000 --period 30 --input-fps 30
 kvazaar -i coaster2.mp4 --input-res 3840x1920 -o coaster2_tiled5x10.hvc --tiles 5x10 --slices tiles --mv-constraint frametilemargin --bitrate 512000000 --period 30 --input-fps 30
@@ -27,9 +29,21 @@ MP4Box -dash 2000 -rap -mpd-title coaster2-tile-dash -frag-rap -profile dashavc2
 cp coaster2_* /var/www/html/dash/
 MP4Client http://localhost/dash/coaster2_tiled.mpd
 ```
-### Start a simple HTTP server
-simple python HTTP server, or an apache server is sufficient
+# Step 2: start a simple HTTP server
+Any HTTP server such as simple python HTTP server, or an apache server is sufficient. Simply copy the mpd files and all the tile files into the same folder.
 
+# Step 3: Access the mpd files through MP4Client.
+To play the DASH video using MP4Client, use the following command:
+```
+MP4Client [URL]
+```
+For example:
+```
+MP4Client http://localhost/dash/coaster2_tiled.mpd
+```
+
+# Prepare the client: 
+In this section, we go into detail how to install MP4Box and MP4Client, which can be used for Step (1) and Step (2)
 ## Install MP4Box and MP4Client
 Follow instruction here: https://github.com/gpac/gpac/wiki/GPAC-Build-Guide-for-Linux
 Use the Full GPAC Build options. When invoking the `configure` command, remember to use the `--enable-debug` option so that the program can be debugged.
