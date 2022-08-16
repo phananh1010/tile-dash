@@ -48,7 +48,28 @@ MP4Client http://localhost/dash/coaster2_tiled.mpd
 In this section, we go into detail how to install MP4Box and MP4Client, which can be used for Step (1) and Step (2)
 ## Install MP4Box and MP4Client
 Follow instruction here: https://github.com/gpac/gpac/wiki/GPAC-Build-Guide-for-Linux
-Use the Full GPAC Build options. When invoking the `configure` command, remember to use the `--enable-debug` option so that the program can be debugged.
+Use the Full GPAC Build options. 
+
+#### NOTE:here are something differs from the instruction above. Make sure you check all of these points to ensure the installation is successful.
+
+Note that `scons` module used by deps_unix use scons built for python2. We need to install python2, then specify the path of scons for .sh file inside deps_unix to scons for python2
+
+```
+sudo apt-get install python2
+```
+
+Have scons use python2 instead of python3. First, open scons file in sudo mode
+```
+sudo vi /usr/bin/scons
+```
+Modify the first line, point to python2
+```
+#! /usr/bin/python2
+```
+
+Go into `./PlatinumSDK/BuildAndCopy2Public.sh` and `./avcap/BuildAndCopy2Public.sh`, change `scons` to `/usr/bin/scons`
+
+When invoking the `configure` command, remember to use the `--enable-debug` option so that the program can be debugged.
 ```
 ./configure --enable-debug
 ```
@@ -68,14 +89,7 @@ build_opensvc_static.sh
 ./PlatinumSDK/BuildAndCopy2Public.sh 
 ./avcap/BuildAndCopy2Public.sh
 ```
-Have scons use python2 instead of python3. First, open scons file in sudo mode
-```
-sudo vi /usr/bin/scons
-```
-Modify the first line, point to python2
-```
-#! /usr/bin/python2
-```
+
 
 
 ## Modify code
