@@ -54,7 +54,10 @@ Use the Full GPAC Build options. When invoking the `configure` command, remember
 ```
 
 NOTE: DO NOT USE GPAC_PUBLIC AS SUGGESTED, USE GPAC AND GO TO DEPS_UNIX AND CHANGE ALL GPAC_PUBLIC TO PUBLIC (IMPORTANT)
-Change gpac_public to gpac in the buid files for deps_unix.
+Change the term `gpac_public` to `gpac` for all content of `.sh` files in deps_unix. Use this command to quickly search the term `gpac_public`
+```
+grep -rnw '.' -e 'gpac_public'
+```
 
 List of files to be changed:
 ```
