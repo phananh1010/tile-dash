@@ -53,11 +53,9 @@ Use the Full GPAC Build options.
 #### NOTE:here are something differs from the instruction above. Make sure you check all of these points to ensure the installation is successful.
 
 Note that `scons` module used by deps_unix use scons built for python2. We need to install python2, then specify the path of scons for .sh file inside deps_unix to scons for python2
-
 ```
 sudo apt-get install python2
 ```
-
 Have scons use python2 instead of python3. First, open scons file in sudo mode
 ```
 sudo vi /usr/bin/scons
@@ -68,6 +66,13 @@ Modify the first line, point to python2
 ```
 
 Go into `./PlatinumSDK/BuildAndCopy2Public.sh` and `./avcap/BuildAndCopy2Public.sh`, change `scons` to `/usr/bin/scons`
+
+Before build the source code, make sure previous code is cleaned up:
+```
+make clean
+make uninstall
+make distclean
+```
 
 When invoking the `configure` command, remember to use the `--enable-debug` option so that the program can be debugged.
 ```
