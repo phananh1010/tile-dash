@@ -9,8 +9,8 @@ We generate tiles from 360 videos in equirectangular format. Two tools are requi
 ### Step 1a: convert the video into yuv
 First, convert video from mp4 to yuv extension using ffmpeg, then re-encode the video such as motion vectors are constrained inside tiles.
 ```
-ffmpeg -i roller.mp4 -filter:v fps=30,scale=3840x1920 roller.yuv
-kvazaar -i roller.yuv --input-res 3840x1920 --input-fps 30 --tiles 10x20 -p 30 --mv-constraint frametilemargin --bitrate 50000000 -o roller10x20.h265
+ffmpeg -i roller.mp4 -filter:v fps=27,scale=3840x1920 roller.yuv
+kvazaar -i roller.yuv --input-res 3840x1920 --input-fps 27 --tiles 10x5 -p 27 --mv-constraint frametilemargin --bitrate 500000000 -o roller10x5.h265
 ```
 
 
