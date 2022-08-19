@@ -45,7 +45,8 @@ MP4Client http://localhost/dash/coaster2_tiled.mpd
 ```
 
 # Prepare the client: 
-In this section, we go into detail how to install MP4Box and MP4Client, which can be used for Step (1) and Step (2)
+In this section, we go into detail how to install MP4Box and MP4Client, which can be used for Step (1) and Step (2). 
+This code has been tested for this commit version: 339e7a7363c4a2b31cd29afee1eefe4866c621b3
 ## Install MP4Box and MP4Client
 Follow instruction here: https://github.com/gpac/gpac/wiki/GPAC-Build-Guide-for-Linux
 Use the Full GPAC Build options. 
