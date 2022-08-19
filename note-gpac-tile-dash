@@ -1,9 +1,13 @@
 The following chain will stored resulting video in yuv format. 
-
-f1  = fs.load_src(URL_MPD )
-f2  = fs.load("tileagg")
-f3  = fs.load("ffdec:hevc")#("ffdec:hevc")#
-f5  = fs.load("fout:dst=testdash.yuv")
+```
+httpin (src=http://localhost/dash/coaster2/coaster210x5.mpd) (ptr=0x55852e82b0f0)
+-(PID coaster210x5.mpd) dashin (ptr=0x55852ea4cb60)
+--(PID V1) tileagg (ptr=0x55852ec30190)
+---(PID V1) nvdec "NVidia HWGL HEVC" (ptr=0x55852ec306a0)
+----(PID V1) ffsws (ptr=0x55852f606620)
+-----(PID V1) writegen (ptr=0x55852ec30d30)
+------(PID V1) fout (dst=testdash.yuv) (ptr=0x55852e7ff1f0)
+```
 
 To convert the yuv back to mp4, use ffmpeg with the following command. Note that the resolusion for `-s` and framerate for `-r` must match
 ```
