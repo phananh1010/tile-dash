@@ -1,0 +1,6 @@
+The following chain will stored resulting video in yuv format. 
+
+To convert the yuv back to mp4, use ffmpeg with the following command. Note that the resolusion for `-s` and framerate for `-r` must match
+```
+ffmpeg -f rawvideo -vcodec rawvideo -s 3840x1920 -r 27 -pix_fmt yuv420p -i C:\Users\phana\Downloads\testdash.yuv -c:v libx265 -preset ultrafast -qp 0 D:\output.mp4
+```
