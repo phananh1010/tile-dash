@@ -15,11 +15,10 @@ kvazaar -i roller.yuv --input-res 3840x1920 --input-fps 27 --tiles 10x5 -p 27 --
 
 
 ### Step 1b: create tiles and mpd file from prepared yuv file
-Then, use ffmpeg to cut videos into multiple tiles, and use MP4Box to create associated mpd file
+Then, use MP4Box to cut videos into multiple tiles, and create associated mpd file
 ```
-ffmpeg -i coaster2.mp4 -s 384x192 -c:v libx264 -b:v 256k -g 120 -an coaster2_384x192_256k.mp4
-ffmpeg -i coaster2.mp4 -s 768x384 -c:v libx264 -b:v 512k -g 120 -an coaster2_768x384_512k.mp4
-MP4Box -dash 2000 -profile dashavc264:onDemand -mpd-title coaster2-dash -out coaster2.mpd -frag 2000 ./coaster2_768x384_512k.mp4 coaster2_384x192_256k.mp4 
+MP4Box -add roller10x5.h265 -new roller10x5.mp4
+MP4Box -dash 1000 -rap -frag-rap -profile live -out roller10x5.mpd roller10x5.mp4
 ```
 
 ### NOTE: Here is another way to use kvazaar & MP4Client to generate tile and mpd files, this process has not been verified
@@ -31,6 +30,8 @@ MP4Box -dash 2000 -rap -mpd-title coaster2-tile-dash -frag-rap -profile dashavc2
 cp coaster2_* /var/www/html/dash/
 MP4Client http://localhost/dash/coaster2_tiled.mpd
 ```
+`-dash` specify duration of each segment, -rap allow decode at the begining of each segment
+
 # Step 2: start a simple HTTP server
 Any HTTP server such as simple python HTTP server, or an apache server is sufficient. Simply copy the mpd files and all the tile files into the same folder.
 
