@@ -4,7 +4,7 @@ In this project, we note several steps to prepare a traditional tile-based DASH 
 Steps including: (1) splitting a 360-degree video from equirectangular format into tiles, (2) hosting a DASH server, and (3) preparing an MP4Client program.
 
 # Step 1: prepare video tiles
-We generate tiles from 360 videos in equirectangular format. Two tools are required: ffmpeg, kvazaar, and Mp4Box. [Reference](https://github.com/gpac/gpac/wiki/Tiled-Streaming)
+We generate tiles from 360 videos in equirectangular format. Three tools are required: ffmpeg, kvazaar, and Mp4Box. [Reference](https://github.com/gpac/gpac/wiki/Tiled-Streaming)
 
 ### Step 1a: convert the video into yuv
 First, convert video from mp4 to yuv extension using ffmpeg, then re-encode the video such as motion vectors are constrained inside tiles.
