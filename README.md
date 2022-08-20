@@ -21,17 +21,6 @@ MP4Box -add coaster2_10x5.hvc:split_tiles -fps 27 -new coaster2_10x5.mp4
 MP4Box -dash 1000 -rap -frag-rap -profile live -out ./coaster2/coaster2_10x5.mpd coaster2_10x5.mp4
 ```
 
-### NOTE: Here is another way to use kvazaar & MP4Client to generate tile and mpd files, this process has not been verified
-```
-kvazaar -i coaster2.mp4 --input-res 3840x1920 -o coaster2_tiled10x20.hvc --tiles 10x20 --slices tiles --mv-constraint frametilemargin --bitrate 128000 --period 30 --input-fps 30
-kvazaar -i coaster2.mp4 --input-res 3840x1920 -o coaster2_tiled5x10.hvc --tiles 5x10 --slices tiles --mv-constraint frametilemargin --bitrate 512000000 --period 30 --input-fps 30
-MP4Box -add coaster2_tiled10x20.hvc:split_tiles -fps 30 -new coaster2_tiled10x20.mp4
-MP4Box -dash 2000 -rap -mpd-title coaster2-tile-dash -frag-rap -profile dashavc264:onDemand -out coaster2_tiled.mpd coaster2_tiled10x20.mp4 
-cp coaster2_* /var/www/html/dash/
-MP4Client http://localhost/dash/coaster2_tiled.mpd
-```
-`-dash` specify duration of each segment, -rap allow decode at the begining of each segment
-
 # Step 2: start a simple HTTP server
 Any HTTP server such as simple python HTTP server, or an apache server is sufficient. Simply copy the mpd files and all the tile files into the same folder.
 
