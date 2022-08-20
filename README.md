@@ -20,7 +20,7 @@ Then, use MP4Box to cut videos into multiple tiles, and create associated mpd fi
 ```
 MP4Box -add coaster2_10x5_1mbps.hvc:split_tiles -fps 27 -new coaster2_10x5_1mbps.mp4
 MP4Box -add coaster2_10x5_1kbps.hvc:split_tiles -fps 27 -new coaster2_10x5_1kbps.mp4
-MP4Box -dash 1000 -rap -frag-rap -profile live -out ./coaster2/coaster2_10x5.mpd coaster2_10x5.mp4
+MP4Box -dash 1000 -rap -frag-rap -profile live -out ./coaster2/coaster2_10x5.mpd coaster2_10x5_1mbps.mp4 coaster2_10x5_1kbps.mp4
 ```
 
 # Step 2: start a simple HTTP server
