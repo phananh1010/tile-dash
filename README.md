@@ -4,21 +4,27 @@ In this project, we note several steps to prepare a traditional tile-based DASH 
 Steps including: (1) splitting a 360-degree video from equirectangular format into tiles, (2) hosting a DASH server, and (3) preparing an MP4Client program.
 
 # Step 1: prepare video tiles
-We generate tiles from 360 videos in equirectangular format. Two tools are required: ffmpeg, kvazaar, and Mp4Box.
+We generate tiles from 360 videos in equirectangular format. Two tools are required: ffmpeg, kvazaar, and Mp4Box. [Reference](https://github.com/gpac/gpac/wiki/Tiled-Streaming)
 
 ### Step 1a: convert the video into yuv
 First, convert video from mp4 to yuv extension using ffmpeg, then re-encode the video such as motion vectors are constrained inside tiles.
 ```
-ffmpeg -i roller.mp4 -filter:v fps=27,scale=3840x1920 roller.yuv
-kvazaar -i roller.yuv --input-res 3840x1920 --input-fps 27 --tiles 10x5 -p 27 --mv-constraint frametilemargin --bitrate 500000000 -o roller10x5.h265
+ffmpeg -i coaster2.mp4 -filter:v fps=27,scale=3840x1920 coaster2.yuv
+kvazaar -i coaster2.yuv --input-res 3840x1920 --input-fps 27 --tiles 10x5 -p 27 --mv-constraint frametilemargin --bitrate 500000000 -o coaster2_10x5.h265
+kvazaar -i coaster2.yuv --input-res 3840x1920 --input-fps 27 --tiles 10x5 -p 27 --mv-constraint frametilemargin --bitrate 500000000 -o coaster2_10x5.hvc
 ```
 
 
 ### Step 1b: create tiles and mpd file from prepared yuv file
 Then, use MP4Box to cut videos into multiple tiles, and create associated mpd file
 ```
-MP4Box -add roller10x5.h265 -new roller10x5.mp4
-MP4Box -dash 1000 -rap -frag-rap -profile live -out roller10x5.mpd roller10x5.mp4
+gpac -i coaster2_10x5.h265 tilesplit -o coaster2_10x5.mp4
+gpac -i ./coaster2/coaster2_10x5.mp4 -o ./coaster2/coaster2_10x5.mpd
+
+Or use MP4Box tool for more tuning option:
+```
+MP4Box -add coaster2.hvc:split_tiles -new coaster2_10x5.mp4
+MP4Box -dash 1000 -rap -frag-rap -profile live -out ./coaster2/coaster2_10x5.mpd coaster2_10x5.mp4
 ```
 
 ### NOTE: Here is another way to use kvazaar & MP4Client to generate tile and mpd files, this process has not been verified
