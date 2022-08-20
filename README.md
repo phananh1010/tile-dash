@@ -10,14 +10,16 @@ We generate tiles from 360 videos in equirectangular format. Three tools are req
 First, convert video from mp4 to yuv extension using ffmpeg, then re-encode the video such as motion vectors are constrained inside tiles.
 ```
 ffmpeg -i coaster2.mp4 -filter:v fps=27,scale=3840x1920 coaster2.yuv
-kvazaar -i coaster2.yuv --input-res 3840x1920 -o coaster2_10x5.hvc --tiles 10x5 --slices tiles --mv-constraint frametilemargin --bitrate 1280000 --period 27 --input-fps 27
+kvazaar -i coaster2.yuv --input-res 3840x1920 -o coaster2_10x5_1mbps.hvc --tiles 10x5 --slices tiles --mv-constraint frametilemargin --bitrate 1280000 --period 27 --input-fps 27
+kvazaar -i coaster2.yuv --input-res 3840x1920 -o coaster2_10x5_1kbps.hvc --tiles 10x5 --slices tiles --mv-constraint frametilemargin --bitrate 1280 --period 27 --input-fps 27
 ```
 
 
 ### Step 1b: create tiles and mpd file from prepared yuv file
 Then, use MP4Box to cut videos into multiple tiles, and create associated mpd file
 ```
-MP4Box -add coaster2_10x5.hvc:split_tiles -fps 27 -new coaster2_10x5.mp4
+MP4Box -add coaster2_10x5_1mbps.hvc:split_tiles -fps 27 -new coaster2_10x5_1mbps.mp4
+MP4Box -add coaster2_10x5_1kbps.hvc:split_tiles -fps 27 -new coaster2_10x5_1kbps.mp4
 MP4Box -dash 1000 -rap -frag-rap -profile live -out ./coaster2/coaster2_10x5.mpd coaster2_10x5.mp4
 ```
 
