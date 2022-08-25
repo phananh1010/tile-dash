@@ -7,14 +7,17 @@ Steps including: (1) splitting a 360-degree video from equirectangular format in
 We generate tiles from 360 videos in equirectangular format. Three tools are required: ffmpeg, kvazaar, and Mp4Box. [Reference](https://github.com/gpac/gpac/wiki/Tiled-Streaming)
 
 ### Step 1a: convert the video into yuv
-First, convert video from mp4 to yuv extension using ffmpeg, then re-encode the video such as motion vectors are constrained inside tiles.
+First, convert video from mp4 to yuv extension using ffmpeg
 ```
 ffmpeg -i coaster2.mp4 -c:v libx265 -b:v 5000M coaster2_500mbps.mp4
 ffmpeg -i coaster2.mp4 -c:v libx265 -b:v 5M coaster2_5mbps.mp4
 
 ffmpeg -i coaster2_500mbps.mp4 -filter:v fps=27,scale=3840x1920 coaster2_500mbps.yuv
 ffmpeg -i coaster2_5mbps.mp4 -filter:v fps=27,scale=3840x1920 coaster2_5mbps.yuv
+```
+Then re-encode the video such as motion vectors are constrained inside tiles.
 
+```
 kvazaar -i coaster2_500mbps.yuv --input-res 3840x1920 -o coaster2_10x5_500mbps.hvc --tiles 10x5 --slices tiles --mv-constraint frametilemargin --bitrate 500000000 --period 27 --input-fps 27
 kvazaar -i coaster2_5mbps.yuv --input-res 3840x1920 -o coaster2_10x5_5mbps.hvc --tiles 10x5 --slices tiles --mv-constraint frametilemargin --bitrate 5000000 --period 27 --input-fps 27
 ```
@@ -23,9 +26,13 @@ kvazaar -i coaster2_5mbps.yuv --input-res 3840x1920 -o coaster2_10x5_5mbps.hvc -
 ### Step 1b: create tiles and mpd file from prepared yuv file
 Then, use MP4Box to cut videos into multiple tiles, and create associated mpd file
 ```
-MP4Box -add coaster2_10x5_1mbps.hvc:split_tiles -fps 27 -new coaster2_10x5_1mbps.mp4
-MP4Box -add coaster2_10x5_1kbps.hvc:split_tiles -fps 27 -new coaster2_10x5_1kbps.mp4
-MP4Box -dash 1000 -rap -frag-rap -profile live -out ./coaster2/coaster2_10x5.mpd coaster2_10x5_1mbps.mp4 coaster2_10x5_1kbps.mp4
+MP4Box -add coaster2_10x5_500mbps.hvc:split_tiles -fps 27 -new coaster2_10x5_500mbps.mp4
+MP4Box -add coaster2_10x5_500kbps.hvc:split_tiles -fps 27 -new coaster2_10x5_500kbps.mp4
+MP4Box -add coaster2_5mbps_960x480.hvc:split_tiles -fps 27 -new coaster2_5mbps_960x480.mp4
+```
+Note that after the commands above, of separated tiles are still in the same `mp4` files. To actually generate tile for DASH streaming, use the following command:
+```
+MP4Box -segment-timeline -dash 1000 -rap -frag-rap -profile live -out ./coaster2/coaster2_10x5.mpd coaster2_10x5_1mbps.mp4 coaster2_10x5_1kbps.mp4
 ```
 
 # Step 2: start a simple HTTP server
