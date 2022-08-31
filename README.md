@@ -60,6 +60,8 @@ Use the Full GPAC Build options.
 Note that `scons` module used by deps_unix use scons built for python2. We need to install python2, then specify the path of scons for .sh file inside deps_unix to scons for python2
 ```
 sudo apt-get install python2
+sudo apt-get install python2-pip
+python -m pip install scons
 ```
 Have scons use python2 instead of python3. First, open scons file in sudo mode
 ```
