@@ -103,6 +103,27 @@ build_opensvc_static.sh
 ```
 
 
+## Construct GPAC pipeline
+To establish testing environment, we need to construct a GPAC pipeline, which is a link of multiple filters. 
+For instance, this command create a simple tile-based DASH client, the end point is a sink, where packet is consumed, but not rendered:
+```
+fs = MyFilterSession(0)
+
+#load a source
+#f1 = fs.load_src("https://download.tsi.telecom-paristech.fr/gpac/DASH_CONFORMANCE/TelecomParisTech/mp4-onDemand/mp4-onDemand-mpd-V.mpd")
+f1 = fs.load_src("http://localhost/dash/coaster2/coaster2_10x5.mpd")
+f2 = fs.load("dashin")
+f3 = fs.load("tileagg")
+#load a sink
+f4 = fs.load("inspect:interleave:false:deep:dur=10:buffer=2000")
+
+f2.set_source(f1)
+f3.set_source(f2)
+f4.set_source(f3)
+```
+
+In the code above, `MyFilterSession` is a custom session, where we could implement our own DASH algorithm
+
 
 ## Modify code
 #### Modify the MP4Client source code
