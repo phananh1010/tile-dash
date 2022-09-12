@@ -5,7 +5,6 @@ import time
 
 import libgpac as gpac
 
-import header
 
 print("Welcome to GPAC Python !\nVersion: " + gpac.version + "\n" + gpac.copyright_cite)
 
