@@ -52,7 +52,7 @@ class MyFilterSession(gpac.FilterSession):
 #create a session
 fs = MyFilterSession(0)
 
-f1 = fs.load_src(f"http://localhost/dash/coaster2/coaster2_10x5.mpd")
+f1 = fs.load_src(f"http://129.174.114.121/dash/coaster2/coaster2_10x5.mpd")
 f2 = fs.load("dashin")
 f3 = fs.load("tileagg")
 #load a sink
