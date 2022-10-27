@@ -5,6 +5,8 @@ This is the tutorial to use mahimahi to emulate the bandwidth fluctuation of net
 
 ## Install Mahimahi
 
+Following instruction from mahimahi [website](http://mahimahi.mit.edu/#usage). 
+
 ## Convert existing traces into Mahimahi format
 
 ## Run Mahimahi
