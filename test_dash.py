@@ -1,3 +1,6 @@
+# This is a simple script showing how to customize DASH algorithm for tile-based streaming using GPAC framework
+
+
 import datetime
 import types
 import sys
